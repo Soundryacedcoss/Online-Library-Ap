@@ -5,7 +5,6 @@ import { contextData } from "./App";
 import { contextSearchData } from "./App";
 export const LandingPage = () => {
   const [input, setInput] = useState();
-  const [BookDetail, setBookDetail] = useState([]);
   const value = useContext(contextData);
   const SearchResult = useContext(contextSearchData);
   const InputHandler = (e) => {
@@ -24,31 +23,12 @@ export const LandingPage = () => {
   const ImageHandler = (val) => {
     for (let i = 0; i < SearchResult.detail.length; i++) {
       if (val === SearchResult.detail[i].key) {
-        BookDetail.push(SearchResult.detail[i]);
-        setBookDetail(BookDetail);
-        console.log(BookDetail.length);
-        if (BookDetail.length === 1) {
-          console.log("if");
-          value.BookDetail1.push(BookDetail);
-          value.setBookDetail1(...value.BookDetail1);
-          console.log(value.BookDetail1);
-          break;
-        } else if (BookDetail.length > 1) {
-          console.log("else");
-          var ot1 = BookDetail.slice(-1);
-          console.log(ot1);
-          value.setBookDetail1(ot1);
-          console.log(value.BookDetail1);
-        }
-        console.log("remainIndex", value.BookDetail1);
+        value.setBookDetail1([SearchResult.detail[i]])
+        console.log(value.BookDetail);
       }
     }
-    // console.log(data[0].key);
-    console.log(BookDetail);
   };
-
   return (
-    
     <div className="LandingPage">
       <h2>Welcome to my Library</h2>
       <input type="search" onChange={InputHandler} /> {" "}
